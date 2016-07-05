@@ -7,7 +7,7 @@ let connectHandler = WebApp.connectHandlers; // get meteor-core's connect-implem
 let getAirtableData = function() {
   Airtable.configure({
     endpointUrl: 'https://api.airtable.com',
-    apiKey: 'keyWQTQBrkgbMOE4w'
+    apiKey: 'keyJoo0QH6ip5yH4S'
   });
 
   let base = Airtable.base('appfroa8YN4yjSWIk');
