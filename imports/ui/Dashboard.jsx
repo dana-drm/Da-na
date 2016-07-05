@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 let Airtable = require('airtable');
 import { Tabs, Tab, Badge, Button, Nav, NavItem, PageHeader, Grid, Row, Col } from 'react-bootstrap';
 import axios from 'axios'
@@ -16,14 +17,14 @@ export default class Dashboad extends Component {
   }
 
   componentWillMount() {
-    axios.get('https://api.airtable.com/v0/appfroa8YN4yjSWIk/UOI?maxRecords=5&view=Main%20View&api_key=keyJoo0QH6ip5yH4S')
+    axios.get('https://api.airtable.com/v0/appfroa8YN4yjSWIk/Beneficiaries?maxRecords=100&view=Main%20View&api_key=keyJoo0QH6ip5yH4S')
       .then(response => this.setState({ campaigns: response.data.records }));
   }
 
 
   handleSelect(eventKey) {
     console.log(eventKey)
-    ReactDOM.render(<BeneficiaryGrid stageKey={eventKey} donors={this.state.donors} campaigns={this.state.campaigns}/>, document.getElementById('BeneficiaryGrid'));
+    ReactDOM.render(<BeneficiaryGrid stageKey={eventKey} campaigns={this.state.campaigns}/>, document.getElementById('BeneficiaryGrid'));
   };
 
 
@@ -49,7 +50,6 @@ export default class Dashboad extends Component {
       display:'flex',
       flexWrap: 'wrap'
     };
-    let task = { _id: 1, text: 'This is task 1' };
 
     return (
 

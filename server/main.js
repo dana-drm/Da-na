@@ -4,62 +4,6 @@ let Airtable = require('airtable');
 
 let connectHandler = WebApp.connectHandlers; // get meteor-core's connect-implementation
 
-let getAirtableData = function() {
-  Airtable.configure({
-    endpointUrl: 'https://api.airtable.com',
-    apiKey: 'keyJoo0QH6ip5yH4S'
-  });
-
-  let base = Airtable.base('appfroa8YN4yjSWIk');
-  let donors = {};
-  let campaigns = {};
-  let stageCounts = {};
-
-  base('Beneficiaries(Dummy)').select({
-        // Selecting the first 3 records in Main View:
-        maxRecords: 400,
-        view: "Main View"
-    }).eachPage(function page(records, fetchNextPage) {
-        // This function (`page`) will get called for each page of records.
-        records.forEach(function(record) {
-
-          stageCounts[record.get('Stage')] += 1;
-          let campaign_name = record.get('Name');
-
-            campaigns[campaign_name] =
-              {
-                campaign_name: record.get('Name'),
-                campaign_condition: record.get('Condition'),
-                campaign_stage: record.get('Stage'),
-                campaign_treatment: record.get('Treatment'),
-                campaign_photo: record.get('Photo')[0].url,
-                home_location: record.get('Home Location'),
-                treatment_location: record.get('Treatment Location'),
-                age: record.get('Age'),
-                gender: record.get('gender'),
-                hosting_chapter: record.get('Hosting Chapter'),
-                family_member: record.get('Family Member'),
-                donor_list: record.get('Donors(Dummy)'),
-            }
-        });
-        fetchNextPage(campaigns);
-        // console.log(campaigns)
-        //callback(campaigns);
-    }.bind(this),
-    function done(error) {
-        //console.log(campaigns);
-        if (error) {
-            console.log(error);
-        }
-
-        return campaigns;
-    });
-
-    console.log(campaigns);
-    // return campaigns;
-
-  };
-
 
 Meteor.methods({
   getCommentsWrapAsync: function() {

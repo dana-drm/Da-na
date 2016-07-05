@@ -53,29 +53,50 @@ export default class BeneficiaryGrid extends Component {
     let keys = Object.keys(this.props.campaigns);
     console.log("stage key is are", this.props.stageKey)
     console.log("campaigns are", this.props.campaigns)
-    for (let key in keys){
-      console.log(keys[key])
-      let campaign_array = this.props.campaigns[keys[key]];
-      for (let c in campaign_array){
-        campaign = campaign_array[c]
-        //var donor = this.props.donors[keys[key]];
-          if (campaign.stage == stageMap[this.props.stageKey]) {
-            rows.push(
-              <Col xs={12} md={3}>
-                <BeneficiaryCell
-                  campaign={campaign}
-                  name={campaign.campaign_name}
-                  stage={campaign.campaign_stage}
-                  img={campaign.campaign_photo}
-                  treatment={campaign.campaign_treatment}
-                  condition={campaign.campaign_condition}
-                  location={campaign.campaign_location}
-                  />
-              </Col>
-          );
-        }
+
+    for (let record of this.props.campaigns) {
+      let campaign = record.fields;
+      console.log("campaign", campaign);
+      if (campaign.Stage == stageMap[this.props.stageKey]) {
+        rows.push(
+          <Col xs={12} md={3}>
+            <BeneficiaryCell
+              campaign={campaign}
+              name={campaign.Name}
+              stage={campaign.Stage}
+              img={campaign.Photo[0].url}
+              treatment={campaign.Treatment}
+              condition={campaign.Condition}
+              location={campaign.Location}
+              />
+          </Col>
+        );
       }
     }
+
+    // for (let key in keys){
+    //   console.log(keys[key])
+    //   let campaign_array = this.props.campaigns[keys[key]];
+    //   for (let c in campaign_array){
+    //     campaign = campaign_array[c]
+    //     //var donor = this.props.donors[keys[key]];
+    //       if (campaign.stage == stageMap[this.props.stageKey]) {
+    //         rows.push(
+    //           <Col xs={12} md={3}>
+    //             <BeneficiaryCell
+    //               campaign={campaign}
+    //               name={campaign.campaign_name}
+    //               stage={campaign.campaign_stage}
+    //               img={campaign.campaign_photo}
+    //               treatment={campaign.campaign_treatment}
+    //               condition={campaign.campaign_condition}
+    //               location={campaign.campaign_location}
+    //               />
+    //           </Col>
+    //       );
+    //     }
+    //   }
+    // }
 
     return (
     <div style={gridStyle}>

@@ -8,7 +8,7 @@ export default class BeneficiaryCell extends Component {
 
     return (
       <div>
-        <Thumbnail>
+        <Thumbnail src={this.props.img}>
           <h5>
             Campaign Name: {this.props.name}
           </h5>
