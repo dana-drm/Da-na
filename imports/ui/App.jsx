@@ -24,11 +24,13 @@ class App extends Component {
 }
 
 App.propTypes = {
+    children: PropTypes.object.isRequired,
     currentUser: PropTypes.object,
 };
 
 export default createContainer((props) => {
   return {
+    children: props.children,
     currentUser: Meteor.user()
   };
 }, App);
